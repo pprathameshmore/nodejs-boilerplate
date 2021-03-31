@@ -1,7 +1,7 @@
 import { MongoError } from 'graphql-compose-mongoose';
 import mongoose from 'mongoose';
 export class GeneralGraphQLError extends Error {
-    ok: boolean = false;
+    ok: boolean = true;
     errorMessage: string;
     code: string;
     suggestion: string;

@@ -1,16 +1,20 @@
-import { GeneralError } from "../../utils/errors";
+import { NextFunction, Request, Response } from 'express';
+import { CustomError } from '../../utils/errors/custom-errors';
 
-const errorHandler = (err, req, res, next) => {
-  if (err instanceof GeneralError) {
-    return res.status(err.getCode()).json({
-      status: "error",
-      message: err.message,
+const errorHandler = (
+    error: Error,
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    if (error instanceof CustomError) {
+        return res
+            .status(error.statusCode)
+            .send({ errors: error.serializeErrors() });
+    }
+    return res.status(400).send({
+        errors: [{ message: error.message }],
     });
-  }
-
-  return res.status(500).json({
-    status: "error",
-    message: err.message,
-  });
 };
+
 export default errorHandler;

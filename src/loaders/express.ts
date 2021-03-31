@@ -9,7 +9,6 @@ import logger from './logger';
 import schema from '../graphql/schema';
 
 export default async (app: Application) => {
-
     //For server's health check
     app.get('/status', (req, res) => {
         res.status(200).end();
@@ -22,7 +21,6 @@ export default async (app: Application) => {
     app.use(express.urlencoded({ extended: true }));
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(cors());
-    app.use(errorHandler);
     logger(app);
 
     //API Routes
