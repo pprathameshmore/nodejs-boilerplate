@@ -1,9 +1,5 @@
 import Container from 'typedi';
 import UserServices from '../../services/user.services';
-import {
-    graphQLResponseGenerator,
-    graphQLErrorHandler,
-} from '../../utils/utils';
 
 const userService = Container.get(UserServices);
 
@@ -12,9 +8,9 @@ export default {
         getUsers: async (parent: any, args: any, context: any, info: any) => {
             try {
                 const users = await userService.getAssets();
-                return graphQLResponseGenerator(users);
+                return users;
             } catch (error) {
-                return graphQLErrorHandler(error);
+                throw error;
             }
         },
     },
@@ -29,13 +25,10 @@ export default {
             const { userInput } = args;
             try {
                 const { username, password } = userInput;
-                const assetCreated = await userService.createUser(
-                    username,
-                    password
-                );
-                return graphQLResponseGenerator(assetCreated);
+                const user = await userService.createUser(username, password);
+                return user;
             } catch (error) {
-                return graphQLErrorHandler(error);
+                throw error;
             }
         },
     },

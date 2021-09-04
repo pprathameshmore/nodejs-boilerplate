@@ -1,23 +1,10 @@
-import { gql } from 'apollo-server';
+import { gql } from 'apollo-server-express';
 
 export default gql`
-    type UserResults {
-        ok: Boolean!
-        error: Error
-        data: [User!]
-    }
-
-    type UserResult {
-        ok: Boolean!
-        error: Error
-        data: User!
-    }
     type User {
-        id: ID
+        id: ID!
         username: String!
         password: String!
-        createdAt: GraphQLDateTime
-        updatedAt: GraphQLDateTime
     }
 
     input UserInput {

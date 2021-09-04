@@ -1,11 +1,11 @@
-import { gql } from 'apollo-server';
+import { gql } from 'apollo-server-express';
 
 const userSchema = gql`
     extend type Query {
-        getUsers: UserResults!
+        getUsers: [User!]!
     }
     extend type Mutation {
-        createUser(userInput: UserInput!): UserResult!
+        createUser(userInput: UserInput!): User!
     }
 `;
 

@@ -1,10 +1,9 @@
 import { Container } from 'typedi';
-export default ({ models }: { models: { name: string; model: any }[] }) => {
+import UserServices from '../services/user.services';
+
+export default () => {
     try {
-        console.log(models);
-        models.forEach(({ name, model }) => {
-            Container.set(name, model);
-        });
+        Container.set('userService', UserServices);
     } catch (error) {
         console.log('Error on dependency injector loader: %o', error);
         throw error;

@@ -1,15 +1,20 @@
-import { Schema, model } from 'mongoose';
-import timestamp from 'mongoose-timestamp';
+import { Schema, model, Document } from 'mongoose';
 
-const userSchema = new Schema({
-    username: {
-        type: String,
+interface IUser extends Document {
+    username: string;
+    password: string;
+}
+
+const userSchema = new Schema(
+    {
+        username: {
+            type: String,
+        },
+        password: {
+            type: String,
+        },
     },
-    password: {
-        type: String,
-    },
-});
+    { timestamps: true }
+);
 
-userSchema.plugin(timestamp);
-
-export default model('User', userSchema);
+export default model<IUser>('User', userSchema);

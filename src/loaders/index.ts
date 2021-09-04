@@ -6,11 +6,8 @@ export default async ({ expressApp }) => {
     await databaseLoader();
     console.log('Connected to Database');
 
-
-    // dependencyInjectorLoader({ models: [assetModel, assetTypeModel] });
-
-    require('./centrifuge');
-    console.log('Jobs loaded');
+    dependencyInjectorLoader();
+    console.log('✌️ Dependency Injector loaded');
 
     await expressLoader(expressApp);
     console.log('Express app loaded');
